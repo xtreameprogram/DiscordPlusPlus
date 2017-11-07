@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "Structs.h"
 
 
 /*******************************************
@@ -95,8 +96,10 @@ PUBLIC
 bool DiscordPlusPlus::DiscordPlusPlus::sendMessage(std::string mess, std::string id) {
 	std::map<std::string, std::string> fields;
 	fields.insert(std::pair<std::string, std::string>("content", mess));
+
 	return DiscordPlusPlus::performRequest(&fields, NULL, "https://discordapp.com/api/v6/channels/" + id + "/messages");
 }
+
 
 DiscordPlusPlus::DiscordPlusPlus::DiscordPlusPlus(std::string token)
 {

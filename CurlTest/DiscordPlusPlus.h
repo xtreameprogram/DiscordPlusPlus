@@ -17,6 +17,6 @@ namespace DiscordPlusPlus {
 		// TODO: Work on making objects for differnet types: Guilds, Client, etc...
 		// For all, add return to see if error
 
-
+		
 	};
 }

@@ -151,6 +151,7 @@
     <ClInclude Include="mprintf.h" />
     <ClInclude Include="multi.h" />
     <ClInclude Include="stdcheaders.h" />
+    <ClInclude Include="Structs.h" />
     <ClInclude Include="system.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="typecheck-gcc.h" />
