@@ -9,6 +9,7 @@ namespace DiscordPlusPlus {
 		std::string token;
 
 		bool performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url);
+		bool performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url, std::string);
 
 	public:
 		DiscordPlusPlus(std::string token);
@@ -17,6 +18,7 @@ namespace DiscordPlusPlus {
 		// TODO: Work on making objects for differnet types: Guilds, Client, etc...
 		// For all, add return to see if error
 
+		bool setName(std::string name);
 		
 	};
 }

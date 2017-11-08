@@ -173,23 +173,6 @@ namespace DiscordPlusPlus {
 		int type;
 	};
 
-	struct Embed
-	{
-		std::string title;
-		std::string type;
-		std::string description;
-		std::string url;
-		//Timestamp
-		int color;
-		EmbedFooter footer;
-		EmbedImage image;
-		EmbedThumbnail thumbnail;
-		EmbedVideo video;
-		EmbedProvider provider;
-		EmbedAuthor author;
-		std::vector<EmbedField> fields;
-	};
-
 	struct EmbedVideo
 	{
 	public:
@@ -318,5 +301,23 @@ namespace DiscordPlusPlus {
 		std::string avatar;
 		std::string token;
 	};
+
+	struct Embed
+	{
+		std::string title;
+		std::string type;
+		std::string description;
+		std::string url;
+		//Timestamp
+		int color;
+		EmbedFooter footer;
+		EmbedImage image;
+		EmbedThumbnail thumbnail;
+		EmbedVideo video;
+		EmbedProvider provider;
+		EmbedAuthor author;
+		std::vector<EmbedField> fields;
+	};
+
 
 }
