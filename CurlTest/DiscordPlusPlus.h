@@ -2,6 +2,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include "Request.h"
 
 namespace DiscordPlusPlus {
 	class DiscordPlusPlus {
@@ -9,9 +10,10 @@ namespace DiscordPlusPlus {
 		std::string token;
 
 		bool performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url);
-		bool performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url, std::string);
+		bool performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url, Request r);
 
 	public:
+
 		DiscordPlusPlus(std::string token);
 		
 		bool sendMessage(std::string message, std::string guildId);

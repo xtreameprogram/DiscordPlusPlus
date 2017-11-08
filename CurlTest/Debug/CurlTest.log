@@ -1,2 +1,16 @@
 ﻿  DiscordPlusPlus.cpp
-  CurlTest.vcxproj -> D:\Documents\Programming\C++\CurlTest\Debug\CurlTest.exe
+c:\users\ford\downloads\discordplusplus-master\discordplusplus-master\curltest\discordplusplus.cpp(90): error C2664: 'std::_Tree_iterator<std::_Tree_val<std::_Tree_simple_types<_Ty>>> std::_Tree<std::_Tmap_traits<_Kty,const char*,_Pr,_Alloc,false>>::insert(std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<_Ty>>>,const std::pair<const _Kty,const char*> &)': cannot convert argument 1 from 'DiscordPlusPlus::Request' to 'std::_Tree_const_iterator<std::_Tree_val<std::_Tree_simple_types<_Ty>>>'
+          with
+          [
+              _Ty=std::pair<const DiscordPlusPlus::Request,const char *>,
+              _Kty=DiscordPlusPlus::Request,
+              _Pr=std::less<DiscordPlusPlus::Request>,
+              _Alloc=std::allocator<std::pair<const DiscordPlusPlus::Request,const char *>>
+          ]
+          and
+          [
+              _Ty=std::pair<const DiscordPlusPlus::Request,const char *>
+          ]
+  c:\users\ford\downloads\discordplusplus-master\discordplusplus-master\curltest\discordplusplus.cpp(90): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  CurlTest.cpp
+  Generating Code...

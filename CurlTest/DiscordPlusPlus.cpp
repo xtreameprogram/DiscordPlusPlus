@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include "Structs.h"
+#include "Request.h"
 
 
 /*******************************************
@@ -82,8 +83,16 @@ bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std:
 	return true;
 }
 
-bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url, std::string method)
+bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url, Request r)
 {
+
+	std::map<Request, const char*> methods;
+	methods.insert(std::make_pair(GET, "GET"));
+	methods.insert(std::make_pair(POST, "POST"));
+	methods.insert(std::make_pair(PUT, "PUT"));
+
+	
+
 	CURL *curl;
 	CURLcode res;
 
