@@ -150,7 +150,6 @@
     <ClInclude Include="easy.h" />
     <ClInclude Include="mprintf.h" />
     <ClInclude Include="multi.h" />
-    <ClInclude Include="Request.h" />
     <ClInclude Include="stdcheaders.h" />
     <ClInclude Include="Structs.h" />
     <ClInclude Include="system.h" />

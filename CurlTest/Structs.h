@@ -53,6 +53,10 @@ namespace DiscordPlusPlus {
 	struct Guild
 	{
 	public:
+		Guild(std::string id) {
+			this->id = id;
+		}
+
 		std::string id;
 		std::string name;
 		std::string icon; 
@@ -133,6 +137,10 @@ namespace DiscordPlusPlus {
 	struct Channel
 	{
 	public:
+		Channel(std::string id) {
+			this->id = id;
+		}
+
 		std::string id;
 		int type;
 		std::string guild_id;
