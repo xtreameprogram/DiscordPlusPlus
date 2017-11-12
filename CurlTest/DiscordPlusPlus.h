@@ -9,8 +9,8 @@ namespace DiscordPlusPlus {
 	private:
 		std::string token;
 
-		bool performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url);
-		bool performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url, std::string);
+		std::string performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url);
+		std::string performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url, std::string);
 
 	public:
 
@@ -23,6 +23,9 @@ namespace DiscordPlusPlus {
 		bool setName(std::string name);
 
 		bool leaveGuild(Guild);
+
+		User getUser();
+		User getUser(std::string id);
 
 		std::vector<Guild> getGuilds();
 

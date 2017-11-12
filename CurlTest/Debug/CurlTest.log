@@ -1,5 +1,31 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (CurlTest.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   DiscordPlusPlus.cpp
+d:\documents\programming\c++\curltest\curltest\json.hpp(6683): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6689): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6695): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6701): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6715): warning C4003: not enough actual parameters for macro 'min'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6715): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6721): warning C4003: not enough actual parameters for macro 'min'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6721): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6727): warning C4003: not enough actual parameters for macro 'min'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6727): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6733): warning C4003: not enough actual parameters for macro 'min'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6733): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6750): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6756): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6762): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6768): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6925): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6931): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6937): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6959): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6965): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(6971): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\json.hpp(7184): warning C4003: not enough actual parameters for macro 'max'
+d:\documents\programming\c++\curltest\curltest\discordplusplus.cpp(30): warning C4101: 'e': unreferenced local variable
+d:\documents\programming\c++\curltest\curltest\discordplusplus.cpp(257): error C2512: 'DiscordPlusPlus::Guild': no appropriate default constructor available
+  d:\documents\programming\c++\curltest\curltest\structs.h(54): note: see declaration of 'DiscordPlusPlus::Guild'
+d:\documents\programming\c++\curltest\curltest\discordplusplus.cpp(259): error C2059: syntax error: '}'
   CurlTest.cpp
   Generating Code...
-  CurlTest.vcxproj -> D:\Documents\Programming\C++\CurlTest\Debug\DiscordPlusPlus.exe

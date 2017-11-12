@@ -149,6 +149,7 @@
     <ClInclude Include="curlver.h" />
     <ClInclude Include="DiscordPlusPlus.h" />
     <ClInclude Include="easy.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="mprintf.h" />
     <ClInclude Include="multi.h" />
     <ClInclude Include="stdcheaders.h" />

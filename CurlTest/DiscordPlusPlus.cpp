@@ -5,7 +5,7 @@
 #include <map>
 #include <vector>
 #include "Structs.h"
-
+#include "json.hpp"
 
 /*******************************************
 
@@ -15,16 +15,33 @@ PRIVATE
 
 ********************************************/
 
-size_t write_data(void *buffer, size_t size, size_t nmemb, void *userp)
+using namespace std;
+using namespace nlohmann;
+
+
+size_t write_data(void *contents, size_t size, size_t nmemb, string *s)
 {
-	return size * nmemb;
+	size_t newLength = size*nmemb;
+	size_t oldLength = s->size();
+	try
+	{
+		s->resize(oldLength + newLength);
+	}
+	catch (bad_alloc &e)
+	{
+		//handle memory problem
+		return 0;
+	}
+
+	copy((char*)contents, (char*)contents + newLength, s->begin() + oldLength);
+	return size*nmemb;
 }
 
-bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url)
+string DiscordPlusPlus::DiscordPlusPlus::performRequest(map<string, string> *postfields, vector<string> *headers, string url)
 {
 	CURL *curl;
 	CURLcode res;
-
+	string s;
 
 	curl_global_init(CURL_GLOBAL_ALL);
 
@@ -33,22 +50,22 @@ bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std:
 
 		struct curl_slist *chunk = NULL;
 
-		std::string tokenAPI = std::string("Authorization: Bot ") + std::string(this->token);
+		string tokenAPI = string("Authorization: Bot ") + string(this->token);
 		
 		if (headers != nullptr) {
-			for (std::string header : *headers) {
+			for (string header : *headers) {
 				chunk = curl_slist_append(chunk, header.c_str());
 			}
 		}
 
-		std::string posts;
+		string posts;
 
 		if (postfields != nullptr) {
-			std::map<std::string, std::string>::iterator it = (*postfields).begin();
+			map<string, string>::iterator it = (*postfields).begin();
 			while (it != (*postfields).end())
 			{
-				std::string part1 = it->first;
-				std::string part2 = it->second;
+				string part1 = it->first;
+				string part2 = it->second;
 
 				posts += part1 + "=" + part2 + "&";
 
@@ -60,14 +77,19 @@ bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std:
 			curl_easy_setopt(curl, CURLOPT_COPYPOSTFIELDS, posts.c_str());
 		}
 
-		//std::cout << posts;
+		//cout << posts;
 		
 		chunk = curl_slist_append(chunk, tokenAPI.c_str());
+
+
+		
 
 		curl_easy_setopt(curl, CURLOPT_HTTPHEADER, chunk);
 		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &s);
+
 
 
 		res = curl_easy_perform(curl);
@@ -75,19 +97,20 @@ bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std:
 		if (res != CURLE_OK)
 			return false;
 
-
 		curl_easy_cleanup(curl);
+
+
 	}
 	curl_global_cleanup();
-	return true;
+	return s;
 }
 
-bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std::string> *postfields, std::vector<std::string> *headers, std::string url, std::string r)
+string DiscordPlusPlus::DiscordPlusPlus::performRequest(map<string, string> *postfields, vector<string> *headers, string url, string r)
 {
 
 	CURL *curl;
 	CURLcode res;
-
+	string s;
 
 	curl_global_init(CURL_GLOBAL_ALL);
 
@@ -96,22 +119,22 @@ bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std:
 
 		struct curl_slist *chunk = NULL;
 
-		std::string tokenAPI = std::string("Authorization: Bot ") + std::string(this->token);
+		string tokenAPI = string("Authorization: Bot ") + string(this->token);
 
 		if (headers != nullptr) {
-			for (std::string header : *headers) {
+			for (string header : *headers) {
 				chunk = curl_slist_append(chunk, header.c_str());
 			}
 		}
 
-		std::string posts;
+		string posts;
 
 		if (postfields != nullptr) {
-			std::map<std::string, std::string>::iterator it = (*postfields).begin();
+			map<string, string>::iterator it = (*postfields).begin();
 			while (it != (*postfields).end())
 			{
-				std::string part1 = it->first;
-				std::string part2 = it->second;
+				string part1 = it->first;
+				string part2 = it->second;
 
 				posts += part1 + "=" + part2 + "&";
 
@@ -123,7 +146,7 @@ bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std:
 			curl_easy_setopt(curl, CURLOPT_COPYPOSTFIELDS, posts.c_str());
 		}
 
-		//std::cout << posts;
+		//cout << posts;
 
 		chunk = curl_slist_append(chunk, tokenAPI.c_str());
 
@@ -132,6 +155,7 @@ bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std:
 		curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
 		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+		curl_easy_setopt(curl, CURLOPT_WRITEDATA, &s);
 
 
 		res = curl_easy_perform(curl);
@@ -143,7 +167,7 @@ bool DiscordPlusPlus::DiscordPlusPlus::performRequest(std::map<std::string, std:
 		curl_easy_cleanup(curl);
 	}
 	curl_global_cleanup();
-	return true;
+	return s;
 }
 
 
@@ -157,18 +181,24 @@ PUBLIC
 ********************************************/
 
 
-bool DiscordPlusPlus::DiscordPlusPlus::sendMessage(std::string mess, Channel channel) {
+bool DiscordPlusPlus::DiscordPlusPlus::sendMessage(string mess, Channel channel) {
 	std::map<std::string, std::string> fields;
 	fields.insert(std::pair<std::string, std::string>("content", mess));
 
-	return DiscordPlusPlus::performRequest(&fields, NULL, "https://discordapp.com/api/v6/channels/" + channel.id + "/messages");
+	string s = DiscordPlusPlus::performRequest(&fields, NULL, "https://discordapp.com/api/v6/channels/" + channel.id + "/messages");
+	json j = json::parse(s);
+	if (j["code"] == NULL) {
+		return true;
+	}
+
+	return false;
 }
 
 
 //I could not for the life of me figure out a better way (in like 5 mins) so this is what I did
 //TODO: Figure out how to utilize previous things because this is forsing JSON
 //If there is another like this, maybe make a function sendJSON()
-bool DiscordPlusPlus::DiscordPlusPlus::setName(std::string name) {
+bool DiscordPlusPlus::DiscordPlusPlus::setName(string name) {
 	CURL *curl;
 	CURLcode res;
 
@@ -180,7 +210,7 @@ bool DiscordPlusPlus::DiscordPlusPlus::setName(std::string name) {
 
 		struct curl_slist *chunk = NULL;
 
-		std::string tokenAPI = std::string("Authorization: Bot ") + std::string(this->token);
+		string tokenAPI = string("Authorization: Bot ") + string(this->token);
 
 		chunk = curl_slist_append(chunk, tokenAPI.c_str());
 		chunk = curl_slist_append(chunk, "Content-Type: application/json");
@@ -191,7 +221,7 @@ bool DiscordPlusPlus::DiscordPlusPlus::setName(std::string name) {
 		curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
 
-		std::string go_to_hell = std::string("{\"username\":\"" + name + "\"}");
+		string go_to_hell = string("{\"username\":\"" + name + "\"}");
 
 		curl_easy_setopt(curl, CURLOPT_POSTFIELDS, go_to_hell.c_str());
 
@@ -210,21 +240,67 @@ bool DiscordPlusPlus::DiscordPlusPlus::setName(std::string name) {
 
 bool DiscordPlusPlus::DiscordPlusPlus::leaveGuild(Guild guild)
 {
-	std::string str = std::string("https://discordapp.com/api/v6/users/@me/guilds/" + guild.id);
-
-	return DiscordPlusPlus::performRequest(NULL, NULL, str.c_str(), "DELETE");
+	string str = string("https://discordapp.com/api/v6/users/@me/guilds/" + guild.id);
+	DiscordPlusPlus::performRequest(NULL, NULL, str.c_str(), "DELETE");
+	return true;
 }
 
 //TODO: Implmenet
-std::vector<DiscordPlusPlus::Guild> DiscordPlusPlus::DiscordPlusPlus::getGuilds()
+//FIX: This doesn't return full guild informattion, so need to come up with some sort of method to get
+//all required information. Maybe if a guild is accessed, a function receive the inromation then save it for furture reference, also a time 
+//stamp so that it can update itself if it is past a threshold
+vector<DiscordPlusPlus::Guild> DiscordPlusPlus::DiscordPlusPlus::getGuilds()
 {
-	return std::vector<Guild>();
+	vector<Guild> guilds;
+	string s = DiscordPlusPlus::performRequest(NULL, NULL, "https://discordapp.com/api/v6/users/@me/guilds");
+	json j = json::parse(s);
+
+	for (json::iterator it = j.begin(); it != j.end(); ++it) {
+		json r = *it;
+		Guild g;
+		//if (!r["owner"].is_null()) 
+	}
+
+	return vector<Guild>();
 }
 
 
+DiscordPlusPlus::User DiscordPlusPlus::DiscordPlusPlus::getUser()
+{
+	User u;
+	string s = DiscordPlusPlus::performRequest(NULL, NULL, "https://discordapp.com/api/v6/users/@me");
+	json j = json::parse(s);
+	if (!j["bot"].is_null())	u.bot = j["bot"].get<bool>();
+	if (!j["avatar"].is_null()) u.avatar = j["avatar"].get<string>();
+	if (!j["discriminator"].is_null())u.discriminator = j["discriminator"].get<string>();
+	if (!j["email"].is_null()) u.email = j["email"].get<string>();
+	if (!j["id"].is_null())u.id = j["id"].get<string>();
+	if (!j["mfa_enabled"].is_null())u.mfa_enabled = j["mfa_enabled"].get<bool>();
+	if (!j["username"].is_null())u.username = j["username"].get<string>();
+	if (!j["verified"].is_null())u.verified = j["verified"].get<bool>();
+
+	return u;
+}
+
+DiscordPlusPlus::User DiscordPlusPlus::DiscordPlusPlus::getUser(string id)
+{
+	User u;
+	string s = DiscordPlusPlus::performRequest(NULL, NULL, string("https://discordapp.com/api/v6/users/" + id));
+	json j = json::parse(s);
+	if (!j["bot"].is_null())	u.bot = j["bot"].get<bool>();
+	if (!j["avatar"].is_null()) u.avatar = j["avatar"].get<string>();
+	if (!j["discriminator"].is_null())u.discriminator = j["discriminator"].get<string>();
+	if (!j["email"].is_null()) u.email = j["email"].get<string>();
+	if (!j["id"].is_null())u.id = j["id"].get<string>();
+	if (!j["mfa_enabled"].is_null())u.mfa_enabled = j["mfa_enabled"].get<bool>();
+	if (!j["username"].is_null())u.username = j["username"].get<string>();
+	if (!j["verified"].is_null())u.verified = j["verified"].get<bool>();
+
+	return u;
+}
 
 
-DiscordPlusPlus::DiscordPlusPlus::DiscordPlusPlus(std::string token)
+DiscordPlusPlus::DiscordPlusPlus::DiscordPlusPlus(string token)
 {
 	this->token = token;
 }
