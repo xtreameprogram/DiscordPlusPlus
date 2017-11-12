@@ -257,7 +257,7 @@ vector<DiscordPlusPlus::Guild> DiscordPlusPlus::DiscordPlusPlus::getGuilds()
 
 	for (json::iterator it = j.begin(); it != j.end(); ++it) {
 		json r = *it;
-		Guild g;
+		Guild g();
 		//if (!r["owner"].is_null()) 
 	}
 

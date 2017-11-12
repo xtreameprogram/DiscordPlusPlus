@@ -24,8 +24,5 @@ d:\documents\programming\c++\curltest\curltest\json.hpp(6965): warning C4003: no
 d:\documents\programming\c++\curltest\curltest\json.hpp(6971): warning C4003: not enough actual parameters for macro 'max'
 d:\documents\programming\c++\curltest\curltest\json.hpp(7184): warning C4003: not enough actual parameters for macro 'max'
 d:\documents\programming\c++\curltest\curltest\discordplusplus.cpp(30): warning C4101: 'e': unreferenced local variable
-d:\documents\programming\c++\curltest\curltest\discordplusplus.cpp(257): error C2512: 'DiscordPlusPlus::Guild': no appropriate default constructor available
-  d:\documents\programming\c++\curltest\curltest\structs.h(54): note: see declaration of 'DiscordPlusPlus::Guild'
-d:\documents\programming\c++\curltest\curltest\discordplusplus.cpp(259): error C2059: syntax error: '}'
-  CurlTest.cpp
-  Generating Code...
+d:\documents\programming\c++\curltest\curltest\discordplusplus.cpp(260): warning C4930: 'DiscordPlusPlus::Guild g(void)': prototyped function not called (was a variable definition intended?)
+  CurlTest.vcxproj -> D:\Documents\Programming\C++\CurlTest\Debug\DiscordPlusPlus.exe
